@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=bahar
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - mongo-data:/data/db
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=bahar
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=123456
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+volumes:
+  mongo-data:
+    driver: local
